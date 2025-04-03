@@ -21,7 +21,8 @@ export const Signup=()=>{
         navigate("/gameArena");
     }
     return(
-        <form onSubmit={handleSubmit} className="flex flex-col mx-4">
+        <form onSubmit={handleSubmit} 
+        className="flex flex-col mx-4">
             <div className="text-slate-400 text-2xl font-bold font-mono m-4 text-center">Create Account</div>
             <label htmlFor="Username" className="text-slate-300 text-lg font-semibold font-mono">Username</label>
             <input type="text" name="Username" id="Username" className="bg-slate-100 font-serif rounded-lg p-2 m-1" required onChange={(e)=>setFormData({...formData,[e.target.name]:e.target.value})}/>
