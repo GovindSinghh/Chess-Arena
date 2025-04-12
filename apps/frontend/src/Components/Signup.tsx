@@ -5,12 +5,12 @@ export const Signup=()=>{
     interface formInfo{
         Username:string,
         Password:string,
-        Nickname:string
+        Email:string
     }
     const [formData,setFormData]=useState<formInfo>({
         Username:"",
         Password:"",
-        Nickname:""
+        Email:""
     });
 
     const navigate=useNavigate();
@@ -28,8 +28,8 @@ export const Signup=()=>{
             <input type="text" name="Username" id="Username" className="bg-slate-100 font-serif rounded-lg p-2 m-1" required onChange={(e)=>setFormData({...formData,[e.target.name]:e.target.value})}/>
             <label htmlFor="Password" className="text-slate-300 text-lg font-semibold font-mono">Password</label>
             <input type="password" name="Password" id="Password" className="bg-slate-100 font-serif rounded-lg p-2 m-1" required onChange={(e)=>setFormData({...formData,[e.target.name]:e.target.value})}/>
-            <label htmlFor="Nickname" className="text-slate-300 text-lg font-semibold font-mono">Nickname</label>
-            <input type="text" name="Nickname" id="Nickname" className="bg-slate-100 font-serif rounded-lg p-2 m-1" required onChange={(e)=>setFormData({...formData,[e.target.name]:e.target.value})}/>
+            <label htmlFor="Email" className="text-slate-300 text-lg font-semibold font-mono">Email</label>
+            <input type="text" name="Email" id="Email" className="bg-slate-100 font-serif rounded-lg p-2 m-1" required onChange={(e)=>setFormData({...formData,[e.target.name]:e.target.value})}/>
             <button type="submit" className="bg-slate-600 text-slate-300 w-[250px] rounded-lg p-2 m-4 hover:bg-slate-500 active:bg-slate-700 cursor-pointer">Create Account</button>
         </form>
     )
