@@ -1,10 +1,13 @@
 {
-  "name": "backend",
+  "name": "ws",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -b",
+    "dev":"node dist/index.js"
+
   },
   "keywords": [],
   "author": "",
@@ -13,9 +16,7 @@
   "dependencies": {
     "@types/ws": "^8.18.0",
     "chess.js": "^1.1.0",
+    "typescript": "^5.8.2",
     "ws": "^8.18.1"
-  },
-  "devDependencies": {
-    "typescript": "^5.8.3"
   }
 }
