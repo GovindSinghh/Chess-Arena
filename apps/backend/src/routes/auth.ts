@@ -26,7 +26,7 @@ router.post('/signup', async (req: Request, res: Response, next: NextFunction): 
 
     if (existingUser) {
       res.status(400).json({
-        message: 'User with this email or username already exists'
+        message: 'User already exists'
       });
       return;
     }
@@ -80,9 +80,9 @@ router.post('/login', async (req: Request, res: Response, next: NextFunction): P
       where: { email: validatedData.email }
     });
 
-    if (!user || !user.password) {
+    if (!user) {
       res.status(401).json({
-        message: 'Invalid email or password'
+        message: 'No user found'
       });
       return;
     }
@@ -109,7 +109,7 @@ router.post('/login', async (req: Request, res: Response, next: NextFunction): P
     // Generate token
     const token = generateToken(user.id);
 
-    res.json({
+    res.status(201).json({
       message: 'Login successful',
       user: {
         id: user.id,

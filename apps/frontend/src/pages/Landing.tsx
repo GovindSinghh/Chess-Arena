@@ -13,10 +13,10 @@ export const Landing=()=>{
     return(
         <>
             {isSignupPopUpOpen && <PopUp onClose={()=>setIsSignupPopUpOpen(false)}>
-                <Signup />
+                <Signup setIsSignupPopUpOpen={setIsSignupPopUpOpen} />
             </PopUp>}
             {isLogInPopUpOpen && <PopUp onClose={()=>setIsLogInPopUpOpen(false)}>
-                <Login />
+                <Login setIsLogInPopUpOpen={setIsLogInPopUpOpen} />
             </PopUp>}
             
             <div className={`bg-gradient-to-r from-slate-800 to-neutral-400 ${isSignupPopUpOpen && 'blur-sm'} ${isLogInPopUpOpen && 'blur-sm'}`}>

@@ -1,6 +1,6 @@
 import { WebSocket } from "ws";
 import { Game } from "./Game";
-import { INIT_GAME, MOVE } from "./messages";
+import { INIT_GAME, MOVE, PLAY_WITH_FRIEND, PLAY_WITH_FRIEND_GAME } from "./messages";
 
 export class GameManager{
     private games:Game[];
@@ -45,6 +45,10 @@ export class GameManager{
                 }
 
                 game.makeMove(socket,message.payload.move);
+            }
+
+            if(message.type===PLAY_WITH_FRIEND){
+                
             }
         });
 

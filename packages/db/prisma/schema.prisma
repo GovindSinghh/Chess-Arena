@@ -12,7 +12,7 @@ model User {
   username      String?   @unique
   email         String   @unique
   provider      AuthProvider
-  password      String?
+  password      String
   rating        Int      @default(1200)
   gamesAsWhite  Game[]   @relation("GamesAsWhite")
   gamesAsBlack  Game[]   @relation("GamesAsBlack")

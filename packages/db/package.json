@@ -4,23 +4,26 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-      "db:generate":"prisma generate",
-      "db:push": "prisma db push --skip-generate",
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "db:dev": "npx prisma migrate dev && npx prisma generate",
-      "db:seed": "prisma db seed"
+        "db:generate": "prisma generate",
+        "db:push": "prisma db push --skip-generate",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "db:dev": "npx prisma migrate dev && npx prisma generate",
+        "db:seed": "prisma db seed"
     },
     "prisma": {
-      "seed": "ts-node prisma/seed.ts"
+        "seed": "ts-node prisma/seed.ts"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
-      "@prisma/client": "5.12.1",
-      "prisma": "^5.12.0"
+        "@prisma/client": "^6.6.0",
+        "typescript": "^5.8.2"
     },
     "exports": {
-      "./client": "./src/index.ts"
+        "./client": "./src/index.ts"
+    },
+    "devDependencies": {
+        "prisma": "^6.6.0"
     }
-  }
+}

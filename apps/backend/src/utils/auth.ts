@@ -2,13 +2,13 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { z } from 'zod';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+const JWT_SECRET = process.env.JWT_SECRET || 'govind-Key';
 
 // Validation schemas
 export const signupSchema = z.object({
   username: z.string().min(3).max(30),
   email: z.string().email(),
-  password: z.string().min(6),
+  password: z.string().min(4),
 });
 
 export const loginSchema = z.object({
