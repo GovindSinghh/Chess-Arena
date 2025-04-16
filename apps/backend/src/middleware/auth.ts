@@ -7,6 +7,7 @@ export interface AuthRequest extends Request {
     id: string;
     email: string;
     username: string | null;
+    rating:number;
   };
 }
 
@@ -26,6 +27,7 @@ export const authenticate =(req: Request, res: Response, next: NextFunction): an
         id: true,
         email: true,
         username: true,
+        rating:true,
       },
     })
       .then(user => {

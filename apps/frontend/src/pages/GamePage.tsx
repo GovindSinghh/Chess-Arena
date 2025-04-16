@@ -3,18 +3,19 @@ import { useState } from "react";
 import { Button } from "../Components/Button";
 import { ChessBoard } from "../Components/ChessBoard";
 import { useSocket } from "../hooks/useSocket";
-import { ToastContainer } from "react-toastify";
+import { Bounce, toast, ToastContainer } from "react-toastify";
 const INIT_GAME="init_game";
 const MOVE="move";
 const GAME_OVER="game_over";
 
 export const GamePage =()=>{
-    const socket=useSocket();
+    const {socket,user}=useSocket();
     
 
     const [chess,setChess]=useState(new Chess());
-    const [board,setBoard]=useState(chess.board());// string of all the 8*8 squares on the board
+    const [board,setBoard]=useState(chess.board());// string of all the 8*8 squares on the board or FEN string
     const [started,setStarted]=useState(false);
+
     let time=0;
 
     if(!socket){
@@ -29,8 +30,18 @@ export const GamePage =()=>{
         switch(message.type){
             case INIT_GAME:{
                 setStarted(true);
-                alert("Game Started");
-                time=message.payload.startTime;
+                toast.success(`Game Started and You are ${message.color}`,{
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                });
+                time=message.startTime;
                 break;
             }
 
@@ -61,8 +72,10 @@ export const GamePage =()=>{
     return(
         <>
         <ToastContainer />
-            <div className="flex justify-center p-40 pt-30 font-mono bg-gradient-to-r from-slate-800 to-neutral-400">
-                {started && <div className="absolute bottom-5 right-5 w-12 h-8 text-center p-2 text-md font-mono bg-neutral-200">{time}</div>}
+            <div className="relative flex justify-center p-40 pt-30 font-mono bg-gradient-to-r from-slate-800 to-neutral-400">
+                <div className=" absolute top-5 left-7 flex items-center justify-center px-2 py-1 bg-gradient-to-b from-yellow-200 to-yellow-400 rounded-md">
+                        <h2 className="text-white text-2xl">Welcome <i>{user?.username}</i></h2>
+                </div>
                 <div className="grid grid-cols-3 md:grid grid-cols-6 w-max-screen-lg w-full">
                     <div className="grid col-span-2 md:grid col-span-4 p-3">
 

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios, { AxiosError } from "axios";
 import {toast,Slide, ToastContainer} from "react-toastify";
 
-    export const Login=({setIsLogInPopUpOpen}:{setIsLogInPopUpOpen:React.Dispatch<React.SetStateAction<boolean>>})=>{
+    export const Login=({setIsSignupPopUpOpen,setIsLogInPopUpOpen}:{setIsSignupPopUpOpen:React.Dispatch<React.SetStateAction<boolean>>,setIsLogInPopUpOpen:React.Dispatch<React.SetStateAction<boolean>>})=>{
     interface formInfo{
         Password:string,
         Email:string
@@ -49,19 +49,24 @@ import {toast,Slide, ToastContainer} from "react-toastify";
                 theme: "light",
                 transition: Slide,
             });
-            setIsLogInPopUpOpen(false);
         }
     }
     return(
         <>
         <ToastContainer newestOnTop />
-            <form onSubmit={handleSubmit} className="flex flex-col mx-4">
-                <div className="text-slate-400 text-2xl font-bold font-mono m-4 text-center">LogIn</div>
-                <label htmlFor="Email" className="text-slate-300 text-lg font-semibold font-mono">Email</label>
+            <form onSubmit={handleSubmit} className="flex flex-col font-mono mx-4">
+                <div className="text-slate-400 text-2xl font-bold m-4 text-center">LogIn</div>
+                <label htmlFor="Email" className="text-slate-300 text-lg font-semibold">Email</label>
                 <input type="text" name="Email" id="Email" className="bg-slate-100 font-serif rounded-lg p-2 m-1" required onChange={(e)=>setFormData({...formData,[e.target.name]:e.target.value})}/>
-                <label htmlFor="Password" className="text-slate-300 text-lg font-semibold font-mono">Password</label>
+                <label htmlFor="Password" className="text-slate-300 text-lg font-semibold">Password</label>
                 <input type="password" name="Password" id="Password" className="bg-slate-100 font-serif rounded-lg p-2 m-1" required onChange={(e)=>setFormData({...formData,[e.target.name]:e.target.value})}/>
                 <button type="submit" className="bg-slate-600 text-slate-300 w-[250px] rounded-lg p-2 m-4 hover:bg-slate-500 active:bg-slate-700 cursor-pointer">LogIn</button>
+                <div className="text-center">
+                    <p className="text-slate-300">Don't have an account! <h3 className="text-neutral-600 cursor-pointer " onClick={()=>{
+                    setIsSignupPopUpOpen(true)
+                    setIsLogInPopUpOpen(false)
+                }}>Create One</h3></p>
+                </div>
             </form>
         </>
     )

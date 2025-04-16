@@ -4,7 +4,7 @@ import axios, { AxiosError } from "axios";
 import { Slide, toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-export const Signup=({setIsSignupPopUpOpen}:{setIsSignupPopUpOpen:React.Dispatch<React.SetStateAction<boolean>>})=>{
+export const Signup=()=>{
     interface formInfo{
         Username:string,
         Email:string,
@@ -38,8 +38,8 @@ export const Signup=({setIsSignupPopUpOpen}:{setIsSignupPopUpOpen:React.Dispatch
                     theme: "light",
                     transition: Slide,
                 });
-                localStorage.setItem("token",response.data.token);
                 navigate("/gameArena");
+                localStorage.setItem("token",response.data.token);
             }
         } catch (error) {
             const axiosError = error as AxiosError<{message: string}>;
@@ -54,7 +54,6 @@ export const Signup=({setIsSignupPopUpOpen}:{setIsSignupPopUpOpen:React.Dispatch
                 theme: "light",
                 transition: Slide,
             });
-            setIsSignupPopUpOpen(false);
         }
     }
     return(

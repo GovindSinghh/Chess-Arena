@@ -16,12 +16,12 @@ export class Game{
         this.chess=new Chess();
         this.player1.send(JSON.stringify({
             type:INIT_GAME,
-            color:"white",
+            color:"White",
             startTime:this.startTime.getTime()
         }));
         this.player2.send(JSON.stringify({
             type:INIT_GAME,
-            color:"black",
+            color:"Black",
             startTime:this.startTime.getTime()
         }));
     }

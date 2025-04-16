@@ -1,6 +1,8 @@
 import { WebSocket } from "ws";
 import { Game } from "./Game";
-import { INIT_GAME, MOVE, PLAY_WITH_FRIEND, PLAY_WITH_FRIEND_GAME } from "./messages";
+import { INIT_GAME, MOVE, PLAY_WITH_FRIEND, TOKEN_MESSAGE } from "./messages";
+import jwt from "jsonwebtoken";
+import prisma from "@repo/db/client";
 
 export class GameManager{
     private games:Game[];
@@ -14,14 +16,30 @@ export class GameManager{
     }
 
     addUser(ws:WebSocket){
-        this.users.push(ws);
         this.addHandler(ws);
     }
 
     addHandler(socket:WebSocket){
         
-        socket.on('message', (data) => {
+        socket.on('message',async (data) => {
             const message=JSON.parse(data.toString());
+
+            if(message.type===TOKEN_MESSAGE){
+                const token=message.token;
+                const { userId }=jwt.verify(token,"govind-key") as { userId:string }
+                const user=await prisma.user.findUnique({
+                    where:{
+                        id:userId
+                    }
+                });
+                
+                if(!user){
+                    console.log("User not found");
+                    return;
+                }
+                this.users.push(socket);
+            }
+            
             if(message.type===INIT_GAME){
         
                 if(this.pendingUser!==null && this.pendingUser!==socket){
@@ -45,10 +63,6 @@ export class GameManager{
                 }
 
                 game.makeMove(socket,message.payload.move);
-            }
-
-            if(message.type===PLAY_WITH_FRIEND){
-                
             }
         });
 

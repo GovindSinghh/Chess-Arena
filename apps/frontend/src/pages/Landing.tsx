@@ -10,13 +10,22 @@ export const Landing=()=>{
     const [isSignupPopUpOpen,setIsSignupPopUpOpen]=useState<boolean>(false);
     const [isLogInPopUpOpen,setIsLogInPopUpOpen]=useState<boolean>(false);
     
+    const handlePlayClick = () => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            navigate("/gameArena");
+        } else {
+            setIsLogInPopUpOpen(true);
+        }
+    };
+    
     return(
         <>
             {isSignupPopUpOpen && <PopUp onClose={()=>setIsSignupPopUpOpen(false)}>
-                <Signup setIsSignupPopUpOpen={setIsSignupPopUpOpen} />
+                <Signup />
             </PopUp>}
             {isLogInPopUpOpen && <PopUp onClose={()=>setIsLogInPopUpOpen(false)}>
-                <Login setIsLogInPopUpOpen={setIsLogInPopUpOpen} />
+                <Login setIsSignupPopUpOpen={setIsSignupPopUpOpen} setIsLogInPopUpOpen={setIsLogInPopUpOpen} />
             </PopUp>}
             
             <div className={`bg-gradient-to-r from-slate-800 to-neutral-400 ${isSignupPopUpOpen && 'blur-sm'} ${isLogInPopUpOpen && 'blur-sm'}`}>
@@ -33,13 +42,9 @@ export const Landing=()=>{
                         <img src='/chessBoard.jpg' alt="chess" className="w-98 h-96 rounded-sm mr-55 shadow-2xl"/>
                         <div className='flex flex-col items-center'>
                             <div className="text-4xl text-center w-100 font-bold font-mono text-slate-800 m-4">Welcome to #1 Chess playing Arena</div>
-                            <Button label="Play Online" onClick={()=>{
-                                navigate("/gameArena");
-                            }}  />
+                            <Button label="Play Online" onClick={handlePlayClick} />
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </>

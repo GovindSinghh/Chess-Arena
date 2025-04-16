@@ -6,19 +6,22 @@ import {
 
 import { GamePage } from "./pages/GamePage";
 import { Landing } from './pages/Landing';
-
-
+import { ProtectedRoute } from "./Components/ProtectedRoute";
 
 function App() {
 
   return(
     <Router>
       <Routes>
-      <Route path="/" element={<Landing />} />
-      <Route path="/gameArena" element={<GamePage />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/gameArena" element={
+          <ProtectedRoute>
+            <GamePage />
+          </ProtectedRoute>
+        } />
       </Routes>
     </Router>
   )
 }
 
-export default App
+export default App;
